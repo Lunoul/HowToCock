@@ -3,9 +3,8 @@
 .idea
 config.py
 *.db
-data/Russia
-data/Ukraine
-data/World
+data/
+
 =======
 # Byte-compiled / optimized / DLL files
 __pycache__/

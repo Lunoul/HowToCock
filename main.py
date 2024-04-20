@@ -1,10 +1,9 @@
 import os
-# модули методов и стран
-# from handlers import methods_chosen, countries_chosen
+
 # Модули функционала
 import modules.database.db as db
 import modules.handlers.admin as admin
-from modules.utils.handlers import methods_chosen, countries_chosen
+from modules.utils.handlers import methods_chosen
 import modules.keyboards.profile as profile
 import modules.keyboards.startbuttons as startbuttons
 from modules.keyboards.profile import profile_info
@@ -44,7 +43,7 @@ async def cmd_start(message: types.Message, state: FSMContext):
     db.add_user(user_id, username)
 
     subscribed = db.get_subscribed(user_id)
-    if subscribed:
+    if subscribed == 0:
         await message.answer("Откройте для себя бесконечные возможности для экспериментов и поиска нужной информации!\n\n*Выберите нужную вам страну для поиска:* ", reply_markup=startbuttons.startbuttos(), parse_mode=ParseMode.MARKDOWN)
         await state.finish()
     else:
@@ -88,21 +87,23 @@ async def profile(call: types.CallbackQuery):
 async def startmethods(call: types.CallbackQuery, state: FSMContext): 
     state = FSMContext(storage, call.from_user.id, None) # Создаем объект состояния
     await methods_chosen(call, state) # Переходим в состояние выбора метода
-
-@rate_limit(3, "country_chosen")
-@dp.callback_query_handler(text="startcountries") # Обработчик для стартового меню
-async def startcountries(call: types.CallbackQuery): 
-    state = FSMContext(storage, call.from_user.id, None) # Создаем объект состояния
-    await countries_chosen(call, state) # Переходим в состояние выбора метода
-
-@dp.callback_query_handler(Text(startswith="search_"), state=Form.country)
+@dp.callback_query_handler(state=Form.method)
 async def searcher(call: types.CallbackQuery, state: FSMContext):
-    await call.answer() 
-    method, country = call.data.split("_")[1:3]
+    await call.answer()
+    data = await state.get_data()
+    methods = data.get('method')
 
-    data_dir = os.path.join(os.path.dirname(__file__), "data") # Путь к папке data
-    country_dir = os.path.join(data_dir, country) # Путь к папке страны
-    file_path = os.path.join(country_dir, f"{method}.txt")
+    if not method:
+        await call.message.answer("No search method provided. Please select a valid method.")
+        return
+
+    data_dir = os.path.join(os.path.dirname(__file__), "data")
+    file_path = os.path.join(data_dir, f"{methods}.txt")
+
+    if not os.path.exists(file_path):
+        await call.message.answer(f"File for method '{methods}' not found. Please ensure the file exists.")
+        return
+
     with open(file_path, "r", encoding="utf-8") as f: # Читаем файл
         text = f.read()
     

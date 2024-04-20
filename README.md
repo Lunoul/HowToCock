@@ -5,7 +5,7 @@ The bot returns links to sources where you can find information about the search
 
 
 ## Features
-```This version without countries, if you want to use version with countries, you can use this [HowToFuck](https://github.com/Lunoul/HowToFuck)```
+```This version without countries, if you want to use version with countries, you can use this``` [HowToFuck](https://github.com/Lunoul/HowToFuck)
 #### At this point, you can add the following methods:
     Phone number (PhoneNumber.txt) 📱
     Full name (FullName.txt) 👤
