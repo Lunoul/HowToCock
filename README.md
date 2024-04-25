@@ -21,8 +21,8 @@ The bot returns links to sources where you can find information about the search
 + ### On Windows/Mac OS and Linux
 
 ```bash
-git clone https://github.com/Lunoul/HowToFuck.git
-cd HowToFuck/
+git clone https://github.com/Lunoul/HowToCock.git
+cd HowToCock/
 pip3 install -r requirements.txt
 
 python3 main.py
@@ -63,6 +63,12 @@ MODE = "MODE" # prod or dev
 +         states.py - aiogram state machine
 +     utils/
 +         handlers.py - handlers for commands and requests
++ data/ - search data
++     CarNumber.txt - car number search data
++     FaceScan.txt - face recognition search data
++     FullName.txt - full name search data
++     NickName.txt - nickname search data
++     PhoneNumber.txt - phone number search data
 
 ```
 
@@ -70,7 +76,7 @@ The `data/` folder contains text files with search data for each country and met
 
 ## How to add a new search method
 In the `data` folder you need to create the name of the desired country, the name of the method in txt format
-Example: `/data/USA/Carnumber.txt`
+Example: `/data/Carnumber.txt`
 
 
 ### Todo
