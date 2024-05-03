@@ -14,9 +14,6 @@ from utils import check_subscription
 # Настройка логгирования
 logging.basicConfig(level=logging.INFO)
 
-
-# Состояния для машины состояний
-
 # Обработчик команды /start
 @dp.message_handler(commands=['start'], state='*')
 async def start_command(message: types.Message, state: FSMContext):

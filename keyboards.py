@@ -16,3 +16,9 @@ methods_keyboard = InlineKeyboardMarkup(
         [InlineKeyboardButton(text="Phone number", callback_data="phone_number")]
     ]
 )
+
+back_to_menu_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [InlineKeyboardButton(text="Назад в меню", callback_data="back_to_menu")]
+    ]
+)
