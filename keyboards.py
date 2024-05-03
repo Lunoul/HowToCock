@@ -1,5 +1,6 @@
 # keyboards.py
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from config import CHANNEL_LINK
 
 # Клавиатура для выбора действия
 start_keyboard = InlineKeyboardMarkup(
@@ -20,5 +21,11 @@ methods_keyboard = InlineKeyboardMarkup(
 back_to_menu_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [InlineKeyboardButton(text="Назад в меню", callback_data="back_to_menu")]
+    ]
+)
+
+subscribe_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [InlineKeyboardButton(text="❌ Подписаться на канал", url=CHANNEL_LINK)]
     ]
 )

@@ -8,7 +8,7 @@ from dispatcher import dp, bot
 from db import create_table, add_user, get_user
 from handlers import handlers
 from states import UserState
-from keyboards import start_keyboard
+from keyboards import start_keyboard, subscribe_keyboard
 from utils import check_subscription
 
 # Настройка логгирования
@@ -21,7 +21,7 @@ async def start_command(message: types.Message, state: FSMContext):
     is_subscribed = await check_subscription(bot, user_id, CHANNEL_ID)
 
     if not is_subscribed:
-        await message.answer("Пожалуйста, подпишитесь на наш канал, чтобы продолжить.")
+        await message.answer("Вы не подписаны на наш канал. Подпишитесь, чтобы продолжить:", reply_markup=subscribe_keyboard)
         await state.set_state(UserState.waiting_for_channel_subscription)
         return
 
@@ -48,7 +48,8 @@ async def check_channel_subscription(callback: types.CallbackQuery, state: FSMCo
     if is_subscribed:
         await start_command(callback.message, state)
     else:
-        await callback.answer("Вы не подписаны на канал. Подпишитесь, чтобы продолжить.")
+        await callback.message.edit_reply_markup(subscribe_keyboard)
+        await callback.answer("Вы не подписаны на наш канал. Подпишитесь, чтобы продолжить.", show_alert=True)
 
 if __name__ == '__main__':
     loop = asyncio.new_event_loop()
