@@ -21,14 +21,14 @@ async def start_command(message: types.Message, state: FSMContext):
     is_subscribed = await check_subscription(bot, user_id, CHANNEL_ID)
 
     if not is_subscribed:
-        await message.answer("Вы не подписаны на наш канал. Подпишитесь, чтобы продолжить:", reply_markup=subscribe_keyboard)
+        await message.answer("*🖐 Вы не подписаны на наш канал. Подпишитесь, чтобы продолжить:*", reply_markup=subscribe_keyboard)
         await state.set_state(UserState.waiting_for_channel_subscription)
         return
 
     if not await get_user(user_id):
         await add_user(user_id, message.date)
 
-    await message.answer("Выберите действие:", reply_markup=start_keyboard)
+    await message.answer("*Откройте для себя бесконечные возможности для экспериментов и поиска нужной информации!*", reply_markup=start_keyboard)
     await state.set_state(UserState.idle)
 
 # Обработчик выбора действия
@@ -49,7 +49,7 @@ async def check_channel_subscription(callback: types.CallbackQuery, state: FSMCo
         await start_command(callback.message, state)
     else:
         await callback.message.edit_reply_markup(subscribe_keyboard)
-        await callback.answer("Вы не подписаны на наш канал. Подпишитесь, чтобы продолжить.", show_alert=True)
+        await callback.answer("*Вы не подписаны на наш канал. Подпишитесь, чтобы продолжить.*", show_alert=True)
 
 if __name__ == '__main__':
     loop = asyncio.new_event_loop()

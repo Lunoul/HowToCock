@@ -17,3 +17,17 @@ def read_file(file_name):
         return content
     else:
         return f"Файл {file_name}.txt не найден"
+
+# Разбиение длинного текста на сообщения
+MAX_MESSAGE_LENGTH = 4096  # Максимальная длина сообщения в Telegram
+
+def split_long_text(text):
+    if len(text) <= MAX_MESSAGE_LENGTH:
+        return [text]
+    else:
+        chunks = []
+        while text:
+            chunk = text[:MAX_MESSAGE_LENGTH]
+            chunks.append(chunk)
+            text = text[MAX_MESSAGE_LENGTH:]
+        return chunks

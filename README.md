@@ -3,15 +3,17 @@
 This Telegram bot provides sources to find people in open source intelligence (OSINT).
 The bot returns links to sources where you can find information about the search object 🌍. (Sources should be added by self).
 
+## 📜 Disclaimer
+This project is made for educational and ethical testing purposes only. Use of this tool to find information about the target without prior consent is illegal. Developers assume no liability and are not responsible for any misuse or damage caused by this tool.
 
 ## Features
 ```This version without countries, if you want to use version with countries, you can use this``` [HowToFuck](https://github.com/Lunoul/HowToFuck)
 #### At this point, you can add the following methods:
-    Phone number (PhoneNumber.txt) 📱
-    Full name (FullName.txt) 👤
-    Car number (CarNumber.txt) 🚗
-    Nickname in social networks and games (NickName.txt) 👾
-    Face recognition (FaceScan.txt) 🧑
+    Phone number (phone_number.txt) 📱
+    Full name (fullname.txt) 👤
+    Car number (car_number.txt) 🚗
+    Nickname in social networks and games (nickname.txt) 👾
+    Face recognition (face_scan.txt) 🧑
 
 
 
@@ -32,64 +34,56 @@ python3 main.py
 
 In the config.py file you need to specify your bot token:
 ```bash
-TOKEN = "YOUR_TOKEN"
+BOT_TOKEN = "YOUR_TOKEN"
 ```
-You can also specify the bot admin ID:
+You need to add channel id and url:
 ```bash
-admin_id = YOUR_ID
-```
-Set logging mode:
-```bash
-MODE = "MODE" # prod or dev
+CHANNEL_ID = (YOUR ID) # Example: -1001234567899
+CHANNEL_LINK= "(Your channel link)" # Example: https://t.me/Durov/
 ```
 
 ## Project Structure
 ```
 + main.py - bot launch
 + config.py - configuration
-+ modules/ - all modules
-+     database/
-+         db.py - database operations
-+     handlers/
-+         admin.py - admin panel
-+     keyboards/
-+         keyboards.py - keyboard creation
-+         profile.py - user profile
-+         startbuttons.py - start menu buttons
-+         startchannels.py - check channels at start
-+     middlewares/
-+         antiflood.py - spam protection
-+         dispatcher.py - dispatcher
-+         states.py - aiogram state machine
-+     utils/
-+         handlers.py - handlers for commands and requests
++     db.py - database operations
++     keyboards.py - keyboard creation
++     dispatcher.py - dispatcher
++     states.py - aiogram state machine
++     handlers.py - handlers for commands and requests
++     utils.py - utility functions
 + data/ - search data
-+     CarNumber.txt - car number search data
-+     FaceScan.txt - face recognition search data
++     Car_Number.txt - car number search data
++     Face_Scan.txt - face recognition search data
 +     FullName.txt - full name search data
 +     NickName.txt - nickname search data
-+     PhoneNumber.txt - phone number search data
++     Phone_Number.txt - phone number search data
 
 ```
 
 The `data/` folder contains text files with search data for each country and method.
 
-## How to add a new search method
-In the `data` folder you need to create the name of the desired country, the name of the method in txt format
-Example: `/data/Carnumber.txt`
+## How to add a new search source?
+In the `data` folder you need to create the name of the method in txt format
+Example: `/data/car_number.txt`
 
 
-### Todo
+## Todo
 
-#### Profile
+### Profile
 + Add donate
 
-#### Main
-+ add arrows to information
-+ database of users (aiosqlite)
+### Main
++ admin panel
++ the ability to add your own sources/categories at admin panel
++ Anti-spam system
++ arrows to information
++ multilanguage
+
+## 🙏 Support
+If you like the project, you can support it by giving a star ⭐, this will help the project to develop and grow.
 
 ## 📝 License
-
 **(MIT) Massachusetts Institute of Technology license**
 
 

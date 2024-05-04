@@ -12,7 +12,7 @@ async def create_table():
 # Добавление нового пользователя
 async def add_user(user_id, first_start):
     async with aiosqlite.connect("users.db") as conn:
-        first_start_str = first_start.strftime('%Y-%m-%d %H:%M:%S')
+        first_start_str = first_start.strftime('%Y-%m-%d')
         await conn.execute("INSERT INTO users (user_id, first_start) VALUES (?, ?)", (user_id, first_start_str))
         await conn.commit()
 
