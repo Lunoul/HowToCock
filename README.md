@@ -46,19 +46,18 @@ CHANNEL_LINK= "(Your channel link)" # Example: https://t.me/Durov/
 ```
 + main.py - bot launch
 + config.py - configuration
-+     db.py - database operations
-+     keyboards.py - keyboard creation
-+     dispatcher.py - dispatcher
-+     states.py - aiogram state machine
-+     handlers.py - handlers for commands and requests
-+     utils.py - utility functions
++ db.py - database operations
++ keyboards.py - keyboard creation
++ dispatcher.py - dispatcher
++ states.py - aiogram state machine
++ handlers.py - handlers for commands and requests
++ utils.py - utility functions
 + data/ - search data
 +     Car_Number.txt - car number search data
 +     Face_Scan.txt - face recognition search data
 +     FullName.txt - full name search data
 +     NickName.txt - nickname search data
 +     Phone_Number.txt - phone number search data
-
 ```
 
 The `data/` folder contains text files with search data for each country and method.
