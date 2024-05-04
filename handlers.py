@@ -1,5 +1,6 @@
+import aiogram
 from aiogram import types
-from dispatcher import dp
+from dispatcher import dp, bot
 from db import get_user
 from keyboards import methods_keyboard, back_to_menu_keyboard, start_keyboard
 from utils import read_file, split_long_text
@@ -21,10 +22,17 @@ async def handle_method(callback: types.CallbackQuery):
     method = callback.data
     file_content = read_file(method)
     text_chunks = split_long_text(file_content)
-    for chunk in text_chunks:
+
+    # Удалить сообщение "Выберите нужный вам метод поиска:"
+    await bot.delete_message(chat_id=callback.message.chat.id, message_id=callback.message.message_id)
+
+    for i, chunk in enumerate(text_chunks):
         try:
-            # Отправить сообщение, не изменить его
-            await callback.message.answer(chunk, reply_markup=back_to_menu_keyboard, disable_web_page_preview=True, parse_mode="HTML")
+            # Если это последний кусок текста, добавьте кнопку "Назад в меню"
+            if i == len(text_chunks) - 1:
+                await bot.send_message(callback.message.chat.id, chunk, reply_markup=back_to_menu_keyboard, disable_web_page_preview=True, parse_mode="HTML")
+            else:
+                await bot.send_message(callback.message.chat.id, chunk, disable_web_page_preview=True, parse_mode="HTML")
         except aiogram.utils.exceptions.MessageTextIsEmpty:
             await callback.message.edit_text("Извините, произошла ошибка при отображении содержимого файла. Пожалуйста, попробуйте еще раз позже.")
             break
