@@ -1,4 +1,3 @@
-# keyboards.py
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import CHANNEL_LINK
 

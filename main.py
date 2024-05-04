@@ -1,9 +1,9 @@
 import logging
 import asyncio
-from aiogram import Dispatcher, executor, types, Bot
+from aiogram import executor, types
 from aiogram.dispatcher import FSMContext
 
-from config import BOT_TOKEN, CHANNEL_ID
+from config import CHANNEL_ID
 from dispatcher import dp, bot
 from db import create_table, add_user, get_user
 from handlers import handlers
@@ -11,10 +11,8 @@ from states import UserState
 from keyboards import start_keyboard, subscribe_keyboard
 from utils import check_subscription
 
-# Настройка логгирования
 logging.basicConfig(level=logging.INFO)
 
-# Обработчик команды /start
 @dp.message_handler(commands=['start'], state='*')
 async def start_command(message: types.Message, state: FSMContext):
     user_id = message.from_user.id

@@ -1,5 +1,4 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
 from dispatcher import dp
 from db import get_user
 from keyboards import methods_keyboard, back_to_menu_keyboard, start_keyboard

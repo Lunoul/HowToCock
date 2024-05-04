@@ -1,4 +1,3 @@
-# utils.py
 from aiogram import Bot
 import os
 
@@ -19,7 +18,7 @@ def read_file(file_name):
         return f"Файл {file_name}.txt не найден"
 
 # Разбиение длинного текста на сообщения
-MAX_MESSAGE_LENGTH = 4096  # Максимальная длина сообщения в Telegram
+MAX_MESSAGE_LENGTH = 4096
 
 def split_long_text(text):
     if len(text) <= MAX_MESSAGE_LENGTH:
